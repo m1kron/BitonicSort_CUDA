@@ -18,7 +18,6 @@ __device__ uint32_t GetNumberOfWarpsInBlock();
 // NOTE: Works only for 1d blocks.
 __device__ uint32_t GetThreadIdxWithinWarp();
 
-
 ////////////////////////////////////////////////////////////////
 //
 // INLINES:
@@ -26,20 +25,17 @@ __device__ uint32_t GetThreadIdxWithinWarp();
 ////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////////////////////////
-__device__ __forceinline__ uint32_t GetWarpIdx()
-{
-    return threadIdx.x / WARP_SIZE;
+__device__ __forceinline__ uint32_t GetWarpIdx() {
+  return threadIdx.x / WARP_SIZE;
 }
 
 ////////////////////////////////////////////////////////////////
-__device__ __forceinline__ uint32_t GetNumberOfWarpsInBlock()
-{
-    return blockDim.x / WARP_SIZE;
+__device__ __forceinline__ uint32_t GetNumberOfWarpsInBlock() {
+  return blockDim.x / WARP_SIZE;
 }
 
 ////////////////////////////////////////////////////////////////
-__device__  __forceinline__ uint32_t GetThreadIdxWithinWarp()
-{
-    return threadIdx.x % WARP_SIZE;
+__device__ __forceinline__ uint32_t GetThreadIdxWithinWarp() {
+  return threadIdx.x % WARP_SIZE;
 }
-}
+}  // namespace tools

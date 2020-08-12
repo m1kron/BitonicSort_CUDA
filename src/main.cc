@@ -21,6 +21,9 @@ const size_t WARMUP_RUNS = 10;
 const size_t BENCHMARK_RUNS = 100;
 #endif
 
+#define CHECK_ERROR(expression) \
+  if (!expression) std::exit(-1)
+
 // Returns true if sequence is bitonic with given bucket size.
 bool CheckIfSequenceIsBitonic(const std::vector<int> &data, size_t bucketSize) {
   for (size_t i = 0; i < data.size(); i += 2 * bucketSize) {
@@ -66,10 +69,12 @@ void PerformTestAndBenchmark(size_t dataSize) {
   CUDA_ERROR_CHECK(cudaMemcpy(gpuPtr, vec.data(), vec.size() * sizeof(int32_t),
                               cudaMemcpyHostToDevice));
 
-  for (size_t i = 0; i < WARMUP_RUNS; ++i) BitonicSort(gpuPtr, vec.size());
+  for (size_t i = 0; i < WARMUP_RUNS; ++i)
+    CHECK_ERROR(BitonicSort(gpuPtr, vec.size()));
 
   cudaTimer.Start();
-  for (int i = 0; i < BENCHMARK_RUNS; ++i) BitonicSort(gpuPtr, vec.size());
+  for (int i = 0; i < BENCHMARK_RUNS; ++i)
+    CHECK_ERROR(BitonicSort(gpuPtr, vec.size()));
   cudaTimer.Stop();
 
   CUDA_ERROR_CHECK(cudaDeviceSynchronize());
