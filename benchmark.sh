@@ -1,3 +1,3 @@
 #!/bin/bash
 
-../buildTEMP/proto1
+../buildTEMP/BitonicSort

@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.13)
 message(STATUS "CMake version: ${CMAKE_VERSION}")
 
-project(proto1 VERSION 0.1 LANGUAGES CXX CUDA)
+project(BitonicSort VERSION 0.1 LANGUAGES CXX CUDA)
 
 file(GLOB cpu_source_files "${CMAKE_SOURCE_DIR}/src/*.cc")
 file(GLOB gpu_source_files "${CMAKE_SOURCE_DIR}/src/cuda/*.cu")
 
-add_executable(proto1 ${cpu_source_files} ${gpu_source_files})
+add_executable(BitonicSort ${cpu_source_files} ${gpu_source_files})
 
-target_include_directories(proto1 PUBLIC ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
+target_include_directories(BitonicSort PUBLIC ${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
 
 set(CMAKE_CUDA_FLAGS_DEBUG "${CMAKE_CUDA_FLAGS_DEBUG} --verbose")
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -gencode=arch=compute_75,code=sm_75 --ptxas-options=-O3 --use_fast_math --generate-line-info --ptxas-options=-v -maxrregcount 64")
