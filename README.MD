@@ -1,7 +1,7 @@
-#Bitonic sort implementation for CUDA
+## Bitonic sort implementation for CUDA
 The repository contains an implementation of bitonic sort algorithm.
 
-## Overview
+### Overview
 NOTE: The code requires at least CUDA 9 and was tested on CUDA 9.1 and CUDA 10.1 on Turing and Kepler archtectures.
 NOTE: During development I cared rather about Turing architecture.
 
@@ -14,7 +14,7 @@ The second level primitives is block primitives. Block sorts data stored in shar
 Last level is currently kernel call, which operates on gpu memory.
 The code assummes that data to sort will fit into GPU memory.
 
-## TODO
+### TODO list
 1. Make sure that code will work with block-stride access. 
 Currently I launch dataSize/SharedMemSize blocks, however ideally I would like to lauch not much more then the number of sms. With carefull implementation, that would increase the number of memory opration is flight, as distant memory regions can be sorted independently.
 
